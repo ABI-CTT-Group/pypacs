@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API and usage examples &mdash; pypacs  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/abi-logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pypacs
+            <img src="_static/abi-vc-rgb.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to pypacs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API and usage examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#check-connectivity">Check connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-and-save-metadata">Query and save metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-files">Download files</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pypacs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API and usage examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-pypacs">
+<span id="api-and-usage-examples"></span><h1>API and usage examples<a class="headerlink" href="#module-pypacs" title="Permalink to this heading"></a></h1>
+<p>You can find the example scripts from the <em>examples/</em> folder.</p>
+<p>Make sure the PACS system you want to interact with is running before moving forward.</p>
+<section id="check-connectivity">
+<h2>Check connectivity<a class="headerlink" href="#check-connectivity" title="Permalink to this heading"></a></h2>
+<p>Check your access to a PACS. If failed, check if the status of your PACS.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pypacs.verify_connectivity">
+<span class="sig-prename descclassname"><span class="pre">pypacs.</span></span><span class="sig-name descname"><span class="pre">verify_connectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypacs.verify_connectivity" title="Permalink to this definition"></a></dt>
+<dd><p>Verify connectivity of the target PACS server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server_ip</strong> (<em>string</em>) – IP address of the target PACS</p></li>
+<li><p><strong>server_port</strong> (<em>string</em>) – port number of the target PACS</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>connectivity status</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usage example: see <code class="docutils literal notranslate"><span class="pre">examples/check_connectivity.py</span></code>.</p>
+</div>
+</section>
+<section id="query-and-save-metadata">
+<h2>Query and save metadata<a class="headerlink" href="#query-and-save-metadata" title="Permalink to this heading"></a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="pypacs.get_metadata">
+<span class="sig-prename descclassname"><span class="pre">pypacs.</span></span><span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypacs.get_metadata" title="Permalink to this definition"></a></dt>
+<dd><p>get metadata beased on query settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server_ip</strong> (<em>string</em>) – IP address of the target PACS</p></li>
+<li><p><strong>server_port</strong> (<em>string</em>) – port number of the target PACS</p></li>
+<li><p><strong>aec</strong> (<em>string</em>) – the called AE title</p></li>
+<li><p><strong>query_settings</strong> (<em>dict</em>) – query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>metadata</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypacs.create_custom_report">
+<span class="sig-prename descclassname"><span class="pre">pypacs.</span></span><span class="sig-name descname"><span class="pre">create_custom_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypacs.create_custom_report" title="Permalink to this definition"></a></dt>
+<dd><p>Create custom report for the metadata</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata</strong> (<em>dict</em>) – metadata/query result</p></li>
+<li><p><strong>fields</strong> (<em>dict</em>) – fields for different query levels (patient, study or series)</p></li>
+<li><p><strong>custom_fields</strong> (<em>list</em>) – a list of custom fields which do not provided by the metadata directly might need to be calculated or queried separately.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypacs.save_metadata">
+<span class="sig-prename descclassname"><span class="pre">pypacs.</span></span><span class="sig-name descname"><span class="pre">save_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypacs.save_metadata" title="Permalink to this definition"></a></dt>
+<dd><p>Write metadata to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata</strong> (<em>dict</em>) – metadata</p></li>
+<li><p><strong>save_path</strong> (<em>string</em>) – path to the target file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usage example:</p>
+<p>The example script <code class="docutils literal notranslate"><span class="pre">examples/query_and_save_metadata.py</span></code> shows you how to query by most of the dicom tags. The metadata will be saved in <code class="docutils literal notranslate"><span class="pre">&lt;pypacs&gt;/examples/out/metadata.json</span></code>
+Please search for the variable <code class="docutils literal notranslate"><span class="pre">query_settings</span></code> and change it to make your owm query.</p>
+<p>The example script <code class="docutils literal notranslate"><span class="pre">examples/query_and_save_metadata_advanced.py</span></code> shows how to make advanced queries such as <code class="docutils literal notranslate"><span class="pre">NumberOfSeriesRelatedInstances</span> <span class="pre">&gt;</span> <span class="pre">100</span></code>
+In this script, please update the variables <code class="docutils literal notranslate"><span class="pre">query_settings</span></code> for normal query conditions and <code class="docutils literal notranslate"><span class="pre">extra_query</span></code> for the advanced options.</p>
+</div>
+</section>
+<section id="download-files">
+<h2>Download files<a class="headerlink" href="#download-files" title="Permalink to this heading"></a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="pypacs.move_files">
+<span class="sig-prename descclassname"><span class="pre">pypacs.</span></span><span class="sig-name descname"><span class="pre">move_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypacs.move_files" title="Permalink to this definition"></a></dt>
+<dd><p>Download files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server_ip</strong> (<em>string</em>) – IP address of the target PACS</p></li>
+<li><p><strong>server_port</strong> (<em>string</em>) – port number of the target PACS</p></li>
+<li><p><strong>aec</strong> (<em>string</em>) – the called AE title</p></li>
+<li><p><strong>aet</strong> (<em>string</em>) – the calling AE title</p></li>
+<li><p><strong>query_settings</strong> (<em>dict</em>) – query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usage example:</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">download_files.py</span></code>, you can download the images to a dicom node (a folder).
+Please update the <code class="docutils literal notranslate"><span class="pre">query_settings</span></code> variable.
+This is a dictionary variable and you need to provide values for the keys <code class="docutils literal notranslate"><span class="pre">StudyInstanceUID</span></code> and <code class="docutils literal notranslate"><span class="pre">SeriesInstanceUID</span></code>.</p>
+</div>
+<p>You can download the images to the mounted eResearch drive on either eResearch VM or on your local machine.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Chinchien Lin, Thiranja Prasad Babarenda Gamage.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
