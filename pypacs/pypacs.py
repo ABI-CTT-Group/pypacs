@@ -6,10 +6,15 @@ from collections import OrderedDict
 
 def verify_connectivity(server_ip, server_port):
     """
+    Verify connectivity of the target PACS server
 
-    :param server_ip. String.
-    :param server_port: String.
-    :return: String. Connectivity status
+    :param server_ip: IP address of the target PACS
+    :type server_ip: string
+    :param server_port: port number of the target PACS
+    :type server_port: string
+
+    :return: connectivity status
+    :rtype: string
     """
     pacs_settings = {
         'executable': '/usr/bin/echoscu',
@@ -22,13 +27,21 @@ def verify_connectivity(server_ip, server_port):
 
 
 def get_metadata(server_ip, server_port, aec, query_settings):
+
     """
     get metadata beased on query settings
-    :param server_ip: Strings
-    :param server_port: Strings
-    :param aec: Strings
-    :param query_settings: Dictionary
-    :return: Dictionary.
+
+    :param server_ip: IP address of the target PACS
+    :type server_ip: string
+    :param server_port: port number of the target PACS
+    :type server_port: string
+    :param aec: the called AE title
+    :type aec: string
+    :param query_settings: query
+    :type query_settings: dict
+
+    :return: metadata
+    :rtype: dict
     """
     pacs_settings = {
         'executable': '/usr/bin/findscu',
@@ -50,11 +63,15 @@ def get_metadata(server_ip, server_port, aec, query_settings):
 
 def save_metadata(metadata, save_path):
     """
-    write metadata to file
+    Write metadata to file
 
-    :param metadata: Dictionary.
-    :param save_path: String. path to file
+    :param metadata: metadata
+    :type metadata: dict
+    :param save_path: path to the target file
+    :type save_path: string
+
     :return:
+    :rtype:
     """
     dir_path = os.path.dirname(save_path)
     if not os.path.exists(dir_path):
@@ -65,6 +82,23 @@ def save_metadata(metadata, save_path):
 
 
 def move_files(server_ip, server_port, aec, aet, query_settings):
+    """
+    Download files
+
+    :param server_ip: IP address of the target PACS
+    :type server_ip: string
+    :param server_port: port number of the target PACS
+    :type server_port: string
+    :param aec: the called AE title
+    :type aec: string
+    :param aet: the calling AE title
+    :type aet: string
+    :param query_settings: query
+    :type query_settings: dict
+
+    :return:
+    :rtype:
+    """
     pacs_settings = {
         'executable': '/usr/bin/movescu',
         'serverIP': str(server_ip),
@@ -80,9 +114,12 @@ def move_files(server_ip, server_port, aec, aet, query_settings):
 
 def get_total_num_of_slices(metadata):
     """
+    Calculate the total number of slices
 
-    :param metadata: Dictionary
-    :return: Int.
+    :param metadata: metadata
+    :type metadata: dict
+    :return: number of files
+    :rtype: int
     """
     num_of_slices = 0
     studies = metadata['data']
@@ -94,6 +131,17 @@ def get_total_num_of_slices(metadata):
 
 
 def filter_by_extra_conditions(metadata, extra_query):
+    """
+    Filter the query results by extra conditions
+
+    :param metadata: metadata/query result
+    :type metadata: dict
+    :param extra_query: filter
+    :type extra_query: dict
+
+    :return:
+    :rtype:
+    """
     studies = metadata['data']
 
     for item in extra_query:
@@ -128,12 +176,16 @@ def filter_by_extra_conditions(metadata, extra_query):
 
 def create_custom_report(metadata, fields=None, custom_fields=None):
     """
-    create custom report for the metadata
+    Create custom report for the metadata
 
-    :param metadata: Dictionary.
-    :param fields: Dictionary. fields for different query levels (patient, study or series)
-    :param custom_fields: TODO. List. a list of custom fields which do not provided by the metadata directly might need to be calculated or queried separately.
+    :param metadata: metadata/query result
+    :type metadata: dict
+    :param fields: fields for different query levels (patient, study or series)
+    :type fields: dict
+    :param custom_fields: a list of custom fields which do not provided by the metadata directly might need to be calculated or queried separately.
+    :type custom_fields: list
     :return:
+    :rtype:
     """
     # TODO. the fields in the report are customisable by providing/modifying the variable "fields"
     if fields is None:

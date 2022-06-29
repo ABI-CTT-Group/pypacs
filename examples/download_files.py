@@ -28,19 +28,16 @@ import json
 import pypacs
 
 if __name__ == '__main__':
-    # TODO. get the config file of the pacs you want to access
-    conf_path = "../resources/conf_dcm4chee_bioeng100.json"
+    # TODO: provide the information of the PACS system you want to interact with.
+    #       make sure the pacs is up and running before executing the script
+    server_ip = ""
+    server_port = ""
+    aec = ""
+    aet = ""
 
-    with open(conf_path) as config_file:
-        cfg = json.load(config_file)
-    server_ip = cfg.get('server_ip')
-    server_port = cfg.get('server_port')
-    aec = cfg.get('aec')
-    aet = cfg.get('aet')
-
+    # TODO. write your query here.
     # Currently, you have to provide StudyInstanceUID and SeriesInstanceUID.
     # Future improvement: allow user to send data from patient, study, series or image levels.
-    # TODO. write your query here.
     query_settings = {
         'StudyInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060122155281200000007',
         'SeriesInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060120104693700002235'
