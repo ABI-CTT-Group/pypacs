@@ -1,5 +1,5 @@
 pfmisc==2.2.4
-pkg-resources==0.0.0
+# pkg-resources==0.0.0
 pretty-py3==0.2.4.post1
 pudb==2020.1
 py-dateutil==2.2
@@ -9,3 +9,10 @@ pypx==1.0.2.0
 six==1.15.0
 terminaltables==3.1.0
 urwid==2.1.2
+parameterized
+sphinx-copybutton
+sphinx-jsonschema
+nbsphinx
+nbsphinx-link
+recommonmark
+sphinx_rtd_theme
