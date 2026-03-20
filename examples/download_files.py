@@ -28,8 +28,8 @@ import json
 import pypacs
 
 if __name__ == '__main__':
-    # TODO. get the config file of the pacs you want to access
-    conf_path = "../resources/conf_dcm4chee_bioeng100.json"
+    # TODO: provide the config file for the PACS you want to connect. see resources/conf_template.json for a config template
+    conf_path = "path_to_config_file"
 
     with open(conf_path) as config_file:
         cfg = json.load(config_file)
@@ -42,8 +42,8 @@ if __name__ == '__main__':
     # Future improvement: allow user to send data from patient, study, series or image levels.
     # TODO. write your query here.
     query_settings = {
-        'StudyInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060122155281200000007',
-        'SeriesInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060120104693700002235'
+        'StudyInstanceUID': '',
+        'SeriesInstanceUID': ''
     }
 
     pypacs.move_files(server_ip=server_ip, server_port=server_port, aec=aec, aet=aet, query_settings=query_settings)

@@ -4,13 +4,13 @@ import os
 import pypacs
 
 if __name__ == '__main__':
+    # TODO: provide the config file for the PACS you want to connect. see resources/conf_template.json for a config template
+    conf_path = "path_to_config_file"
+
     save_dir = 'out/'
     save_filename = 'metadata.json'
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
-
-    # TODO: get the config file of the pacs you want to access
-    conf_path = "../resources/conf_dcm4chee_bioeng100.json"
 
     with open(conf_path) as config_file:
         cfg = json.load(config_file)
