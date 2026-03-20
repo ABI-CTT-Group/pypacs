@@ -28,19 +28,22 @@ import json
 import pypacs
 
 if __name__ == '__main__':
-    # TODO: provide the information of the PACS system you want to interact with.
-    #       make sure the pacs is up and running before executing the script
-    server_ip = ""
-    server_port = ""
-    aec = ""
-    aet = ""
+    # TODO: provide the config file for the PACS you want to connect. see resources/conf_template.json for a config template
+    conf_path = "path_to_config_file"
 
-    # TODO. write your query here.
+    with open(conf_path) as config_file:
+        cfg = json.load(config_file)
+    server_ip = cfg.get('server_ip')
+    server_port = cfg.get('server_port')
+    aec = cfg.get('aec')
+    aet = cfg.get('aet')
+
     # Currently, you have to provide StudyInstanceUID and SeriesInstanceUID.
     # Future improvement: allow user to send data from patient, study, series or image levels.
+    # TODO. write your query here.
     query_settings = {
-        'StudyInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060122155281200000007',
-        'SeriesInstanceUID': '1.3.12.2.1107.5.2.30.25138.30000006060120104693700002235'
+        'StudyInstanceUID': '',
+        'SeriesInstanceUID': ''
     }
 
     pypacs.move_files(server_ip=server_ip, server_port=server_port, aec=aec, aet=aet, query_settings=query_settings)
