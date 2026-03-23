@@ -134,3 +134,6 @@ dmypy.json
 # out
 out
 **/out/
+
+# others
+./my_workspace/
