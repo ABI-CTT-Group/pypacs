@@ -24,8 +24,7 @@ def load_config(conf_path):
 
 def main():
     # ── Configuration ──────────────────────────────────────────────────
-    conf_path = os.path.join(os.path.dirname(__file__),
-                             "configs", "config_uoa471493.json")
+    conf_path = "path_to_config_file"
     cfg = load_config(conf_path)
 
     server_ip = cfg["server_ip"]
