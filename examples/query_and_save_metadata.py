@@ -1,9 +1,9 @@
 """
 Query a remote Orthanc DICOM server using pypx (via pypacs wrapper).
 
-Reads connection settings from configs/config_uoa471493.json and queries
-the Orthanc server running at 130.216.253.184:4242.
-
+Connection settings (e.g., server IP/port, AET/AEC) are read from a JSON
+configuration file. See ``resources/conf_template.json`` for a template
+that can be copied and customized for your environment.
 Usage:
     cd my_workspace
     python query_and_save_metadata.py
