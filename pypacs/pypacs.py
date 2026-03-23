@@ -1,3 +1,4 @@
+import asyncio
 import os
 import pypx
 import json
@@ -50,13 +51,41 @@ def get_metadata(server_ip, server_port, aec, query_settings):
         'aec': aec
     }
 
+    # Added pypx v3.12.6 expected defaults that are not auto-populated
+    default_kwargs = {
+        'StudyOnly': False,
+        'QueryReturnTags': '',
+        'AccessionNumber': '',
+        'PatientID': '',
+        'PatientName': '',
+        'PatientSex': '',
+        'StudyDate': '',
+        'ModalitiesInStudy': '',
+        'Modality': '',
+        'PerformedStationAETitle': '',
+        'StudyDescription': '',
+        'SeriesDescription': '',
+        'SeriesInstanceUID': '',
+        'StudyInstanceUID': '',
+        'ProtocolName': '',
+        'AcquisitionProtocolName': '',
+        'AcquisitionProtocolDescription': '',
+        'withFeedBack': False,
+        'then': '',
+        'thenArgs': '',
+        'intraSeriesRetrieveDelay': '0',
+        'move': False,
+        'json': False,
+        'verbosity': 1
+    }
+
     output_settings = {
         'printReport': 'json',
         'colorize': 'dark'
     }
 
-    opt = {**pacs_settings, **query_settings, **output_settings}
-    metadata = pypx.find(opt)
+    opt = {**default_kwargs, **pacs_settings, **query_settings, **output_settings}
+    metadata = asyncio.run(pypx.find(opt))
 
     return metadata
 
