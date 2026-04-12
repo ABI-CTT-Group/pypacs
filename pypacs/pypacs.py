@@ -84,6 +84,25 @@ def get_metadata(server_ip, server_port, aec, query_settings):
         'colorize': 'dark'
     }
 
+    # If QueryReturnTags is specified, merge with the standard DICOM tags
+    # so that essential tags (e.g. StudyInstanceUID) are never dropped.
+    if query_settings.get('QueryReturnTags'):
+        standard_tags = [
+            'AccessionNumber', 'PatientID', 'PatientName',
+            'PatientBirthDate', 'PatientAge', 'PatientSex',
+            'StudyDate', 'StudyDescription', 'StudyInstanceUID',
+            'Modality', 'ModalitiesInStudy', 'PerformedStationAETitle',
+            'NumberOfPatientRelatedInstances', 'NumberOfPatientRelatedStudies',
+            'NumberOfPatientRelatedSeries', 'NumberOfStudyRelatedInstances',
+            'NumberOfStudyRelatedSeries', 'NumberOfSeriesRelatedInstances',
+            'InstanceNumber', 'SeriesDate', 'SeriesDescription',
+            'SeriesInstanceUID', 'ProtocolName',
+            'AcquisitionProtocolDescription', 'AcquisitionProtocolName',
+        ]
+        custom_tags = [t.strip() for t in query_settings['QueryReturnTags'].split(',')]
+        all_tags = standard_tags + [t for t in custom_tags if t not in standard_tags]
+        query_settings = {**query_settings, 'QueryReturnTags': ','.join(all_tags)}
+
     opt = {**default_kwargs, **pacs_settings, **query_settings, **output_settings}
     metadata = asyncio.run(pypx.find(opt))
 
